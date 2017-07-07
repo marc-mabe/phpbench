@@ -97,6 +97,7 @@ EOT;
      * @OutputTimeUnit("seconds")
      * @OutputMode("throughput")
      * @Warmup(501)
+     * @Assert("mean < 100")
      */
 EOT;
         $reflection->methods[$method->name] = $method;
@@ -115,6 +116,7 @@ EOT;
         $this->assertEquals('seconds', $metadata->getOutputTimeUnit());
         $this->assertEquals('throughput', $metadata->getOutputMode());
         $this->assertEquals([501], $metadata->getWarmup());
+        $this->assertEquals('mean < 100', $metadata->getAssertions()[0]->__toString());
         $this->assertTrue($metadata->getSkip());
     }
 
